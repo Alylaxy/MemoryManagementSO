@@ -51,7 +51,7 @@ namespace MemoryManagement
                         i = j; // Skip to the end of the current free block
                     }
                 }
-                Console.WriteLine($"Reg. Base = {bestIndex}\tReg. Limite = {bestIndex + processSize}\nTamanho Processo: {processSize}");
+                Console.WriteLine($"Tamanho Processo: {processSize}\nReg. Base = {bestIndex}\tReg. Limite = {bestIndex + processSize}\n\n");
                 if (bestIndex != -1)
                 {
                     // Add process to the tuple
@@ -96,6 +96,15 @@ namespace MemoryManagement
                     }
                 }
             }
+            Console.WriteLine();
+            int k = 1;
+            foreach (var block in MemoryBlock)
+            {
+                Console.WriteLine($"Bloco {k}:\t{block}");
+                k++;
+                Console.WriteLine();
+            }
+            Console.WriteLine();
         }
 
         public static void BestFit()
@@ -131,11 +140,11 @@ namespace MemoryManagement
                         i = j; // Skip to the end of the current free block
                     }
                 }
-                Console.WriteLine($"Reg. Base = {bestIndex}\tReg. Limite = {bestIndex + processSize}\nTamanho Processo: {processSize}");
+                Console.WriteLine($"Tamanho Processo: {processSize}\nReg. Base = {bestIndex}\tReg. Limite = {bestIndex + processSize}\n\n");
                 if (bestIndex != -1)
                 {
                     // Add process to the tuple
-                    Processos.Add(new Tuple<int, int>(bestIndex, processSize));
+                    Processos.Add(new Tuple<int, int>(bestIndex, bestIndex + processSize));
 
                     // Save the position of this process for future removal
                     var inicio = bestIndex;
@@ -161,7 +170,7 @@ namespace MemoryManagement
                     {
                         Tuple<int, int>? processo = Processos[i];
                         var tamanho = processo.Item2 - processo.Item1;
-                        if(tamanho > processSize && tamanho < bestProcess)
+                        if(tamanho >= processSize && tamanho < bestProcess)
                         {
                             bestProcess = i;
                         }
@@ -185,6 +194,7 @@ namespace MemoryManagement
                     }
                 }
             }
+            Console.WriteLine();
             int k = 1;
             foreach (var block in MemoryBlock)
             {
@@ -192,6 +202,7 @@ namespace MemoryManagement
                 k++;
                 Console.WriteLine();
             }
+            Console.WriteLine();
         }
 
     }

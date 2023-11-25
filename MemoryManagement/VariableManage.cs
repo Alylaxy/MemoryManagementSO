@@ -14,6 +14,7 @@ namespace MemoryManagement
                 Console.WriteLine("0 = Sair | 1 = Alterar bloco | 2 = Mostrar blocos| 3 = Adicionar um processo |  " +
                                   "4 = Alterar processo | 5 = Mostrar processos");
                 int opcao = Convert.ToInt32(Console.ReadLine());
+                Console.Clear();
                 switch (opcao){
                     case 1:
                         AlteraBloco();
@@ -56,17 +57,28 @@ namespace MemoryManagement
                 Console.WriteLine("Valor inválido. Insira outro valor.\n(0 - Livre | 1 - Ocupado)");
             }
             MemoryManage.MemoryBlock[bloco - 1] = estado;
+
+            Console.WriteLine();
+            MostraBlocos();
+            Console.ReadLine();
+            Console.Clear();
         }
 
         private static void AlteraProcesso()
         {
-            Console.WriteLine("Qual processo deseja alterar?");
             MostraProcessos();
+            Console.WriteLine("\n:");
+            Console.Write("Qual processo deseja alterar: ");
             int processo = Convert.ToInt32(Console.ReadLine());
             if (processo < 1) return;
-            Console.WriteLine("Qual o novo tamanho do processo?");
+            Console.Write("Qual o novo tamanho do processo: ");
             int tamanho = Convert.ToInt32(Console.ReadLine());
             MemoryManage.ProcessSize[processo - 1] = tamanho;
+            Console.WriteLine();
+            MostraProcessos();
+            Console.ReadLine();
+            Console.Clear();
+
         }
 
         private static void AdicionaProcesso()
@@ -75,7 +87,11 @@ namespace MemoryManagement
             int tamanho = Convert.ToInt32(Console.ReadLine());
             if (tamanho < 1) return;
             MemoryManage.ProcessSize.Add(tamanho);
+            Console.WriteLine();
             MostraProcessos();
+            Console.ReadLine();
+            Console.Clear();
+
         }
 
         private static void MostraBlocos()
